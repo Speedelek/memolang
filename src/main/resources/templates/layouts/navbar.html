@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+
+
+<body>
+
+
+<div id="nav_bar" class="navbar" th:fragment="navbar-default" style="padding-right: 50px;margin-top: 0;margin-bottom: 0">
+    <ul>
+        <li ><a href="/allword">Allword</a></li>
+        <li ><a href="/quickplay">Quickplay</a></li>
+
+
+        <li class="dropdown"><a>Játékok</a>
+                <ul>
+                    <!--<li class="dropdown-content" style="overflow: hidden"><a th:href="@{'http://localhost:8080/products/' + '1'}">Szendvics</a></li>
+                    <li class="dropdown-content" style="overflow: hidden"><a th:href="@{'http://localhost:8080/products/' + '2'}">Hamburger</a></li>
+                    <li class="dropdown-content" style="overflow: hidden"><a th:href="@{'http://localhost:8080/products/' + '3'}">Pizza</a></li>
+                    <li class="dropdown-content" style="overflow: hidden"><a th:href="@{'http://localhost:8080/products/' + '4'}">Sós</a></li>
+                    <li class="dropdown-content" style="overflow: hidden"><a th:href="@{'http://localhost:8080/products/' + '5'}">Édes</a></li>
+                    <li class="dropdown-content" style="overflow: hidden"><a th:href="@{'http://localhost:8080/products/' + '6'}">Üdítő</a></li>
+                    <li class="dropdown-content" style="overflow: hidden"><a th:href="@{'http://localhost:8080/products/' + '7'}">Kávé</a></li>-->
+                    <li class="dropdown-content" style="overflow: hidden"><a href="http://localhost:8080/products/">tmp1</a></li>
+                    <li class="dropdown-content" style="overflow: hidden"><a href="http://localhost:8080/productsasd/">tmp2</a></li>
+                </ul>
+        </li>
+
+        <li class=""><a href="/profile">Profilom</a></li>
+    </ul>
+
+
+    <div class="navbar-text navbar-right" style="color: #F5F5F5;line-height: 0px;text-align: center">
+        Üdvözlünk
+        <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
+            <span sec:authentication="name"></span>
+            | <a class="login-out" href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Kijelentkezés</a>
+        </form>
+        <form sec:authorize="!isAuthenticated()" id="frmlogin" method="post" class="form-inline">
+            | <a class="login-out" href="javascript:{}" onclick="document.getElementById('frmlogin').submit(); return false;">Bejelentkezés</a>
+        </form>
+
+    </div>
+</div>
+
+</body>
+
+</html>
