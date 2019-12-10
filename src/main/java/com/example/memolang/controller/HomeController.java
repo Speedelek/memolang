@@ -5,15 +5,22 @@ import com.example.memolang.repository.UserRepository;
 import com.example.memolang.service.UserService;
 import com.example.memolang.service.WordEngService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
@@ -61,6 +68,44 @@ public class HomeController {
         return "profile";
     }
 
+
+    @PostMapping("/delete")
+    public String delete(@AuthenticationPrincipal UserDetails currentUser, HttpServletRequest request, HttpServletResponse response) {
+        User user = (User) userService.findByUsername(currentUser.getUsername());
+        // usersRoleSercive.deleteUsersRole(user);
+        Long id = user.getId();
+        userService.deleteById(Long.valueOf(id));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "auth/login";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute User user, @AuthenticationPrincipal UserDetails currentUser, Model model, BindingResult bindingResult) {
+        User currUser = (User) userService.findByUsername(currentUser.getUsername());
+        if (user.getPassword() == "") {
+            model.addAttribute("errorMessage", "Adj meg egy jelszót");
+            bindingResult.reject("password");
+        }
+        if (bindingResult.hasErrors()) {
+            return "profile_edit";
+        } else {
+            userService.deleteById(Long.valueOf(currUser.getId()));
+            userService.userCheck(user);
+            userService.updateUser(user);
+            return "profile";
+        }
+    }
+
+
+    @RequestMapping("/profile_edit")
+    public String profileEdit(Model model, @AuthenticationPrincipal UserDetails currentUser) {
+        User user = (User) userService.findByUsername(currentUser.getUsername());
+        model.addAttribute("user", user);
+        return "profile_edit";
+    }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {

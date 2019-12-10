@@ -46,7 +46,9 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 
                // .regexMatchers(".*\\.css$").permitAll()
                // .regexMatchers(".*\\.png$").permitAll()
-                .antMatchers("/**").permitAll()
+                //.antMatchers("/**").permitAll()
+                .antMatchers("/quickplay").permitAll()
+                .antMatchers("/allword").permitAll()
                 .antMatchers("/static/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET,"/","/buffet/**","/products/**").permitAll()

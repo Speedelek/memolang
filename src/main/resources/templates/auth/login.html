@@ -15,7 +15,7 @@
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div class="login-box col-md-12">
-                        <form id="login-form" class="form" th:action="@{/quickplay}" method="post">
+                        <form id="login-form" class="form" th:action="@{/login}" method="post">
                             <h3 class="text-center text-info">Bejelentkezés</h3>
                             <div id="err" th:if="${param.error}" class="alert alert-danger">Hibás felhasználói név vagy jelszó</div>
                             <div th:if="${param.logout}" class="alert alert-success">Sikeresen kijelentkeztél</div>
