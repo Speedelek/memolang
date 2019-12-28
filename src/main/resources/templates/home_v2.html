@@ -13,7 +13,8 @@
 
     <article th:each="word : ${words}">
         <header>
-            <h1 th:text="${word.engWord}"></h1>
+            <h1 th:text="${word.englishWord}"></h1>
+
         </header>
 
         <section th:text="${word.partOfSpeech}">

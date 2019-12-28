@@ -4,6 +4,8 @@ import com.example.memolang.entities.registration.User;
 import com.example.memolang.repository.UserRepository;
 import com.example.memolang.service.UserService;
 import com.example.memolang.service.WordEngService;
+import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.english_words.EnglishWords;
+import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.english_words.EnglishWordsManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
@@ -44,11 +48,13 @@ public class HomeController {
         this.userRepository = userRepository;
     }
 
+    @Autowired
+    EnglishWordsManager englishWords;
 
     @RequestMapping("/")
     public String home(Model model) {
         model.addAttribute("words", wordEngService.getEnglishWords());
-        return "home";
+        return "home_v1";
     }
 
     @RequestMapping("/allword")
@@ -56,8 +62,16 @@ public class HomeController {
        // model.addAttribute("pageTitle", "Test title");
        // model.addAttribute("footerText", "testFooter");
         //model.addAttribute("buffets", buffetService.getBuffetEntities());
-        model.addAttribute("words", wordEngService.getEnglishWords());
-        return "home";
+        //model.addAttribute("words", wordEngService.getEnglishWords());
+
+       // List<EnglishWords> englishWordsList = englishWords.stream().collect(Collectors.toList());
+        //List<EnglishWords> englishWordsList = englishWords.stream().collect(Collectors.toList());
+        //model.addAttribute("words", englishWordsList);
+        EnglishWords englishWords1 = englishWords.stream().findFirst().get();
+        //System.out.println(englishWords1.getEnglishWordId() + " " + englishWords1.getEnglishWord() +
+        //        " " + englishWords1.getInSpeech() + " " + englishWords1.getInWriting() + " " + englishWords1.getPartOfSpeech());
+        model.addAttribute("words",englishWords1);
+        return "home_v2";
     }
 
     @RequestMapping("/profile")
@@ -139,11 +153,16 @@ public class HomeController {
         }
     }
 
-
-    @RequestMapping("/quickplay")
+    @RequestMapping(value = "/quickplay", method = RequestMethod.GET)
     public String getTenRandomEnglishWord(Model model){
         model.addAttribute("words", wordEngService.getTenRandomWord());
+        //System.out.println(englishWords.stream().collect(Collectors.toList()));
         return "quickPlay";
     }
+
+    /*@RequestMapping(value = "/quickplay", method = RequestMethod.POST)
+    public String sendAnswers()*/
+
+
 
 }

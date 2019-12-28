@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymleaf.org">
+
+
+<head th:replace="layouts/header :: header"></head>
+<body>
+
+<div class="container">
+
+    <nav th:replace="layouts/navbar :: navbar-default"></nav>
+
+    <article th:each="word : ${words}">
+        <header>
+            <h1 th:text="${word.engWord}"></h1>
+
+        </header>
+
+        <section th:text="${word.partOfSpeech}">
+            <p>part of scpeech</p>
+        </section>
+
+
+        <hr/>
+    </article>
+
+    <ul></ul>
+    
+
+    <footer>
+        <p>Powered by Me</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
