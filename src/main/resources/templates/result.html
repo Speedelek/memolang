@@ -11,22 +11,7 @@
 
     <nav th:replace="layouts/navbar :: navbar-default"></nav>
 
-    <article th:each="word : ${words}">
-        <header>
-            <h1 th:text="${word.englishWord}"></h1>
-            <!--<h2 th:text="${word.englishWordId}"></h2>-->
-        </header>
-
-        <section th:text="${word.partOfSpeech}">
-            <p>part of scpeech</p>
-        </section>
-
-
-        <hr/>
-    </article>
-
-    <ul></ul>
-    
+    <p th:text="${res}">asd</p>
 
     <footer>
         <p>Powered by Me</p>

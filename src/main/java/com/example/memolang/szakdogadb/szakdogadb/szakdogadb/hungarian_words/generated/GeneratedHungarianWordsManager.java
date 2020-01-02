@@ -27,7 +27,8 @@ public interface GeneratedHungarianWordsManager extends Manager<HungarianWords> 
     TableIdentifier<HungarianWords> IDENTIFIER = TableIdentifier.of("szakdogadb", "szakdogadb", "hungarian_words");
     List<Field<HungarianWords>> FIELDS = unmodifiableList(asList(
         HungarianWords.HUNGARIAN_WORD_ID,
-        HungarianWords.HUNGARIAN_WORD
+        HungarianWords.HUNGARIAN_WORD,
+        HungarianWords.HUNGARIAN_WORDSCOL
     ));
     
     @Override

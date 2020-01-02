@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static com.speedment.common.injector.State.RESOLVED;
-import static com.speedment.runtime.core.util.ResultSetUtil.*;
 
 /**
  * The generated Sql Adapter for a {@link
@@ -35,8 +34,8 @@ public abstract class GeneratedEnglishHungarianSqlAdapter implements SqlAdapter<
     protected EnglishHungarian apply(ResultSet resultSet, int offset) throws SQLException {
         return createEntity()
             .setEnglishHungarianId( resultSet.getInt(1 + offset))
-            .setEnglishWordId(      getInt(resultSet, 2 + offset))
-            .setHungarianWordId(    getInt(resultSet, 3 + offset))
+            .setEnglishWordId(      resultSet.getInt(2 + offset))
+            .setHungarianWordId(    resultSet.getInt(3 + offset))
             .setExampleSentence(    resultSet.getString(4 + offset))
             ;
     }

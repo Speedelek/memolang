@@ -6,7 +6,6 @@ import com.speedment.runtime.core.util.OptionalUtil;
 
 import java.util.Objects;
 import java.util.Optional;
-import java.util.OptionalInt;
 import java.util.StringJoiner;
 
 /**
@@ -22,8 +21,8 @@ import java.util.StringJoiner;
 public abstract class GeneratedEnglishHungarianImpl implements EnglishHungarian {
     
     private int englishHungarianId;
-    private Integer englishWordId;
-    private Integer hungarianWordId;
+    private int englishWordId;
+    private int hungarianWordId;
     private String exampleSentence;
     
     protected GeneratedEnglishHungarianImpl() {}
@@ -34,13 +33,13 @@ public abstract class GeneratedEnglishHungarianImpl implements EnglishHungarian 
     }
     
     @Override
-    public OptionalInt getEnglishWordId() {
-        return OptionalUtil.ofNullable(englishWordId);
+    public int getEnglishWordId() {
+        return englishWordId;
     }
     
     @Override
-    public OptionalInt getHungarianWordId() {
-        return OptionalUtil.ofNullable(hungarianWordId);
+    public int getHungarianWordId() {
+        return hungarianWordId;
     }
     
     @Override
@@ -55,13 +54,13 @@ public abstract class GeneratedEnglishHungarianImpl implements EnglishHungarian 
     }
     
     @Override
-    public EnglishHungarian setEnglishWordId(Integer englishWordId) {
+    public EnglishHungarian setEnglishWordId(int englishWordId) {
         this.englishWordId = englishWordId;
         return this;
     }
     
     @Override
-    public EnglishHungarian setHungarianWordId(Integer hungarianWordId) {
+    public EnglishHungarian setHungarianWordId(int hungarianWordId) {
         this.hungarianWordId = hungarianWordId;
         return this;
     }
@@ -76,8 +75,8 @@ public abstract class GeneratedEnglishHungarianImpl implements EnglishHungarian 
     public String toString() {
         final StringJoiner sj = new StringJoiner(", ", "{ ", " }");
         sj.add("englishHungarianId = " + Objects.toString(getEnglishHungarianId()));
-        sj.add("englishWordId = "      + Objects.toString(OptionalUtil.unwrap(getEnglishWordId())));
-        sj.add("hungarianWordId = "    + Objects.toString(OptionalUtil.unwrap(getHungarianWordId())));
+        sj.add("englishWordId = "      + Objects.toString(getEnglishWordId()));
+        sj.add("hungarianWordId = "    + Objects.toString(getHungarianWordId()));
         sj.add("exampleSentence = "    + Objects.toString(OptionalUtil.unwrap(getExampleSentence())));
         return "EnglishHungarianImpl " + sj.toString();
     }
@@ -88,8 +87,8 @@ public abstract class GeneratedEnglishHungarianImpl implements EnglishHungarian 
         if (!(that instanceof EnglishHungarian)) { return false; }
         final EnglishHungarian thatEnglishHungarian = (EnglishHungarian)that;
         if (this.getEnglishHungarianId() != thatEnglishHungarian.getEnglishHungarianId()) { return false; }
-        if (!Objects.equals(this.getEnglishWordId(), thatEnglishHungarian.getEnglishWordId())) { return false; }
-        if (!Objects.equals(this.getHungarianWordId(), thatEnglishHungarian.getHungarianWordId())) { return false; }
+        if (this.getEnglishWordId() != thatEnglishHungarian.getEnglishWordId()) { return false; }
+        if (this.getHungarianWordId() != thatEnglishHungarian.getHungarianWordId()) { return false; }
         if (!Objects.equals(this.getExampleSentence(), thatEnglishHungarian.getExampleSentence())) { return false; }
         return true;
     }
@@ -98,8 +97,8 @@ public abstract class GeneratedEnglishHungarianImpl implements EnglishHungarian 
     public int hashCode() {
         int hash = 7;
         hash = 31 * hash + Integer.hashCode(getEnglishHungarianId());
-        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getEnglishWordId()));
-        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getHungarianWordId()));
+        hash = 31 * hash + Integer.hashCode(getEnglishWordId());
+        hash = 31 * hash + Integer.hashCode(getHungarianWordId());
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getExampleSentence()));
         return hash;
     }

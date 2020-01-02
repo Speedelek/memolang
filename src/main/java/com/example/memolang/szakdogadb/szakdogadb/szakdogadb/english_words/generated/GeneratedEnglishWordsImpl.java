@@ -34,8 +34,8 @@ public abstract class GeneratedEnglishWordsImpl implements EnglishWords {
     }
     
     @Override
-    public Optional<String> getEnglishWord() {
-        return Optional.ofNullable(englishWord);
+    public String getEnglishWord() {
+        return englishWord;
     }
     
     @Override
@@ -49,8 +49,8 @@ public abstract class GeneratedEnglishWordsImpl implements EnglishWords {
     }
     
     @Override
-    public Optional<String> getPartOfSpeech() {
-        return Optional.ofNullable(partOfSpeech);
+    public String getPartOfSpeech() {
+        return partOfSpeech;
     }
     
     @Override
@@ -87,10 +87,10 @@ public abstract class GeneratedEnglishWordsImpl implements EnglishWords {
     public String toString() {
         final StringJoiner sj = new StringJoiner(", ", "{ ", " }");
         sj.add("englishWordId = " + Objects.toString(getEnglishWordId()));
-        sj.add("englishWord = "   + Objects.toString(OptionalUtil.unwrap(getEnglishWord())));
+        sj.add("englishWord = "   + Objects.toString(getEnglishWord()));
         sj.add("inSpeech = "      + Objects.toString(OptionalUtil.unwrap(getInSpeech())));
         sj.add("inWriting = "     + Objects.toString(OptionalUtil.unwrap(getInWriting())));
-        sj.add("partOfSpeech = "  + Objects.toString(OptionalUtil.unwrap(getPartOfSpeech())));
+        sj.add("partOfSpeech = "  + Objects.toString(getPartOfSpeech()));
         return "EnglishWordsImpl " + sj.toString();
     }
     
@@ -111,10 +111,10 @@ public abstract class GeneratedEnglishWordsImpl implements EnglishWords {
     public int hashCode() {
         int hash = 7;
         hash = 31 * hash + Integer.hashCode(getEnglishWordId());
-        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getEnglishWord()));
+        hash = 31 * hash + Objects.hashCode(getEnglishWord());
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getInSpeech()));
         hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getInWriting()));
-        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getPartOfSpeech()));
+        hash = 31 * hash + Objects.hashCode(getPartOfSpeech());
         return hash;
     }
 }

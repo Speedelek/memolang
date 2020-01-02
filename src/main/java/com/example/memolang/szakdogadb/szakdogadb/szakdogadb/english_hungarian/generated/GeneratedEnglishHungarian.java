@@ -5,13 +5,11 @@ import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.runtime.config.identifier.ColumnIdentifier;
 import com.speedment.runtime.config.identifier.TableIdentifier;
 import com.speedment.runtime.core.util.OptionalUtil;
-import com.speedment.runtime.field.ComparableField;
 import com.speedment.runtime.field.IntField;
 import com.speedment.runtime.field.StringField;
 import com.speedment.runtime.typemapper.TypeMapper;
 
 import java.util.Optional;
-import java.util.OptionalInt;
 
 /**
  * The generated base for the {@link
@@ -42,22 +40,22 @@ public interface GeneratedEnglishHungarian {
      * This Field corresponds to the {@link EnglishHungarian} field that can be
      * obtained using the {@link EnglishHungarian#getEnglishWordId()} method.
      */
-    ComparableField<EnglishHungarian, Integer, Integer> ENGLISH_WORD_ID = ComparableField.create(
+    IntField<EnglishHungarian, Integer> ENGLISH_WORD_ID = IntField.create(
         Identifier.ENGLISH_WORD_ID,
-        o -> OptionalUtil.unwrap(o.getEnglishWordId()),
+        EnglishHungarian::getEnglishWordId,
         EnglishHungarian::setEnglishWordId,
-        TypeMapper.identity(),
+        TypeMapper.primitive(),
         false
     );
     /**
      * This Field corresponds to the {@link EnglishHungarian} field that can be
      * obtained using the {@link EnglishHungarian#getHungarianWordId()} method.
      */
-    ComparableField<EnglishHungarian, Integer, Integer> HUNGARIAN_WORD_ID = ComparableField.create(
+    IntField<EnglishHungarian, Integer> HUNGARIAN_WORD_ID = IntField.create(
         Identifier.HUNGARIAN_WORD_ID,
-        o -> OptionalUtil.unwrap(o.getHungarianWordId()),
+        EnglishHungarian::getHungarianWordId,
         EnglishHungarian::setHungarianWordId,
-        TypeMapper.identity(),
+        TypeMapper.primitive(),
         false
     );
     /**
@@ -88,7 +86,7 @@ public interface GeneratedEnglishHungarian {
      * 
      * @return the englishWordId of this EnglishHungarian
      */
-    OptionalInt getEnglishWordId();
+    int getEnglishWordId();
     
     /**
      * Returns the hungarianWordId of this EnglishHungarian. The hungarianWordId
@@ -97,7 +95,7 @@ public interface GeneratedEnglishHungarian {
      * 
      * @return the hungarianWordId of this EnglishHungarian
      */
-    OptionalInt getHungarianWordId();
+    int getHungarianWordId();
     
     /**
      * Returns the exampleSentence of this EnglishHungarian. The exampleSentence
@@ -126,7 +124,7 @@ public interface GeneratedEnglishHungarian {
      * @param englishWordId to set of this EnglishHungarian
      * @return              this EnglishHungarian instance
      */
-    EnglishHungarian setEnglishWordId(Integer englishWordId);
+    EnglishHungarian setEnglishWordId(int englishWordId);
     
     /**
      * Sets the hungarianWordId of this EnglishHungarian. The hungarianWordId
@@ -136,7 +134,7 @@ public interface GeneratedEnglishHungarian {
      * @param hungarianWordId to set of this EnglishHungarian
      * @return                this EnglishHungarian instance
      */
-    EnglishHungarian setHungarianWordId(Integer hungarianWordId);
+    EnglishHungarian setHungarianWordId(int hungarianWordId);
     
     /**
      * Sets the exampleSentence of this EnglishHungarian. The exampleSentence

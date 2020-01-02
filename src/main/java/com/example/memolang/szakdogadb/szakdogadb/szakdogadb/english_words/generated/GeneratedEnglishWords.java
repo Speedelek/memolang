@@ -41,7 +41,7 @@ public interface GeneratedEnglishWords {
      */
     StringField<EnglishWords, String> ENGLISH_WORD = StringField.create(
         Identifier.ENGLISH_WORD,
-        o -> OptionalUtil.unwrap(o.getEnglishWord()),
+        EnglishWords::getEnglishWord,
         EnglishWords::setEnglishWord,
         TypeMapper.identity(),
         false
@@ -74,7 +74,7 @@ public interface GeneratedEnglishWords {
      */
     StringField<EnglishWords, String> PART_OF_SPEECH = StringField.create(
         Identifier.PART_OF_SPEECH,
-        o -> OptionalUtil.unwrap(o.getPartOfSpeech()),
+        EnglishWords::getPartOfSpeech,
         EnglishWords::setPartOfSpeech,
         TypeMapper.identity(),
         false
@@ -96,7 +96,7 @@ public interface GeneratedEnglishWords {
      * 
      * @return the englishWord of this EnglishWords
      */
-    Optional<String> getEnglishWord();
+    String getEnglishWord();
     
     /**
      * Returns the inSpeech of this EnglishWords. The inSpeech field corresponds
@@ -122,7 +122,7 @@ public interface GeneratedEnglishWords {
      * 
      * @return the partOfSpeech of this EnglishWords
      */
-    Optional<String> getPartOfSpeech();
+    String getPartOfSpeech();
     
     /**
      * Sets the englishWordId of this EnglishWords. The englishWordId field

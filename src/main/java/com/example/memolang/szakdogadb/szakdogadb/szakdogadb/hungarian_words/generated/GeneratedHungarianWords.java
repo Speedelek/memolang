@@ -4,12 +4,9 @@ import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.hungarian_words.Hun
 import com.speedment.common.annotation.GeneratedCode;
 import com.speedment.runtime.config.identifier.ColumnIdentifier;
 import com.speedment.runtime.config.identifier.TableIdentifier;
-import com.speedment.runtime.core.util.OptionalUtil;
 import com.speedment.runtime.field.IntField;
 import com.speedment.runtime.field.StringField;
 import com.speedment.runtime.typemapper.TypeMapper;
-
-import java.util.Optional;
 
 /**
  * The generated base for the {@link
@@ -41,8 +38,19 @@ public interface GeneratedHungarianWords {
      */
     StringField<HungarianWords, String> HUNGARIAN_WORD = StringField.create(
         Identifier.HUNGARIAN_WORD,
-        o -> OptionalUtil.unwrap(o.getHungarianWord()),
+        HungarianWords::getHungarianWord,
         HungarianWords::setHungarianWord,
+        TypeMapper.identity(),
+        false
+    );
+    /**
+     * This Field corresponds to the {@link HungarianWords} field that can be
+     * obtained using the {@link HungarianWords#getHungarianWordscol()} method.
+     */
+    StringField<HungarianWords, String> HUNGARIAN_WORDSCOL = StringField.create(
+        Identifier.HUNGARIAN_WORDSCOL,
+        HungarianWords::getHungarianWordscol,
+        HungarianWords::setHungarianWordscol,
         TypeMapper.identity(),
         false
     );
@@ -63,7 +71,16 @@ public interface GeneratedHungarianWords {
      * 
      * @return the hungarianWord of this HungarianWords
      */
-    Optional<String> getHungarianWord();
+    String getHungarianWord();
+    
+    /**
+     * Returns the hungarianWordscol of this HungarianWords. The
+     * hungarianWordscol field corresponds to the database column
+     * szakdogadb.szakdogadb.hungarian_words.hungarian_wordscol.
+     * 
+     * @return the hungarianWordscol of this HungarianWords
+     */
+    String getHungarianWordscol();
     
     /**
      * Sets the hungarianWordId of this HungarianWords. The hungarianWordId
@@ -85,10 +102,21 @@ public interface GeneratedHungarianWords {
      */
     HungarianWords setHungarianWord(String hungarianWord);
     
+    /**
+     * Sets the hungarianWordscol of this HungarianWords. The hungarianWordscol
+     * field corresponds to the database column
+     * szakdogadb.szakdogadb.hungarian_words.hungarian_wordscol.
+     * 
+     * @param hungarianWordscol to set of this HungarianWords
+     * @return                  this HungarianWords instance
+     */
+    HungarianWords setHungarianWordscol(String hungarianWordscol);
+    
     enum Identifier implements ColumnIdentifier<HungarianWords> {
         
-        HUNGARIAN_WORD_ID ("hungarian_word_id"),
-        HUNGARIAN_WORD    ("hungarian_word");
+        HUNGARIAN_WORD_ID  ("hungarian_word_id"),
+        HUNGARIAN_WORD     ("hungarian_word"),
+        HUNGARIAN_WORDSCOL ("hungarian_wordscol");
         
         private final String columnId;
         private final TableIdentifier<HungarianWords> tableIdentifier;

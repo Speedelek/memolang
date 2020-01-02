@@ -11,12 +11,16 @@
     "packageName" : "com.example.memolang.szakdogadb",
     "dbmses" : [
       {
+        "nameProtected" : true,
         "expanded" : true,
         "port" : 3306,
         "schemas" : [
           {
+            "nameProtected" : true,
+            "expanded" : true,
             "tables" : [
               {
+                "nameProtected" : true,
                 "expanded" : true,
                 "primaryKeyColumns" : [
                   {
@@ -49,8 +53,8 @@
                 "columns" : [
                   {
                     "databaseType" : "java.lang.Integer",
-                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "expanded" : true,
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "nullable" : false,
                     "name" : "english_hungarian_id",
                     "id" : "english_hungarian_id",
@@ -60,7 +64,8 @@
                   {
                     "databaseType" : "java.lang.Integer",
                     "expanded" : true,
-                    "nullable" : true,
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
+                    "nullable" : false,
                     "name" : "english_word_id",
                     "id" : "english_word_id",
                     "ordinalPosition" : 2,
@@ -69,7 +74,8 @@
                   {
                     "databaseType" : "java.lang.Integer",
                     "expanded" : true,
-                    "nullable" : true,
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
+                    "nullable" : false,
                     "name" : "hungarian_word_id",
                     "id" : "hungarian_word_id",
                     "ordinalPosition" : 3,
@@ -122,8 +128,8 @@
                 "columns" : [
                   {
                     "databaseType" : "java.lang.Integer",
-                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "expanded" : true,
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "nullable" : false,
                     "name" : "english_word_id",
                     "id" : "english_word_id",
@@ -133,7 +139,7 @@
                   {
                     "databaseType" : "java.lang.String",
                     "expanded" : true,
-                    "nullable" : true,
+                    "nullable" : false,
                     "name" : "english_word",
                     "id" : "english_word",
                     "ordinalPosition" : 2,
@@ -160,7 +166,7 @@
                   {
                     "databaseType" : "java.lang.String",
                     "expanded" : true,
-                    "nullable" : true,
+                    "nullable" : false,
                     "name" : "part_of_speech",
                     "id" : "part_of_speech",
                     "ordinalPosition" : 5,
@@ -250,7 +256,8 @@
                     "expanded" : true,
                     "name" : "hungarian_word_id",
                     "id" : "hungarian_word_id",
-                    "ordinalPosition" : 1
+                    "ordinalPosition" : 1,
+                    "enabled" : true
                   }
                 ],
                 "indexes" : [
@@ -267,27 +274,39 @@
                         "ordinalPosition" : 1
                       }
                     ],
-                    "id" : "PRIMARY"
+                    "id" : "PRIMARY",
+                    "enabled" : true
                   }
                 ],
                 "isView" : false,
                 "columns" : [
                   {
                     "databaseType" : "java.lang.Integer",
-                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "expanded" : true,
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "nullable" : false,
                     "name" : "hungarian_word_id",
                     "id" : "hungarian_word_id",
-                    "ordinalPosition" : 1
+                    "ordinalPosition" : 1,
+                    "enabled" : true
                   },
                   {
                     "databaseType" : "java.lang.String",
                     "expanded" : true,
-                    "nullable" : true,
+                    "nullable" : false,
                     "name" : "hungarian_word",
                     "id" : "hungarian_word",
-                    "ordinalPosition" : 2
+                    "ordinalPosition" : 2,
+                    "enabled" : true
+                  },
+                  {
+                    "databaseType" : "java.lang.String",
+                    "expanded" : true,
+                    "nullable" : false,
+                    "name" : "hungarian_wordscol",
+                    "id" : "hungarian_wordscol",
+                    "ordinalPosition" : 3,
+                    "enabled" : true
                   }
                 ],
                 "name" : "hungarian_words",
@@ -301,7 +320,8 @@
                     "expanded" : true,
                     "name" : "id",
                     "id" : "id",
-                    "ordinalPosition" : 1
+                    "ordinalPosition" : 1,
+                    "enabled" : true
                   }
                 ],
                 "indexes" : [
@@ -318,19 +338,21 @@
                         "ordinalPosition" : 1
                       }
                     ],
-                    "id" : "PRIMARY"
+                    "id" : "PRIMARY",
+                    "enabled" : true
                   }
                 ],
                 "isView" : false,
                 "columns" : [
                   {
                     "databaseType" : "java.lang.Long",
-                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "expanded" : true,
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "nullable" : false,
                     "name" : "id",
                     "id" : "id",
-                    "ordinalPosition" : 1
+                    "ordinalPosition" : 1,
+                    "enabled" : true
                   },
                   {
                     "databaseType" : "java.lang.String",
@@ -338,11 +360,79 @@
                     "nullable" : true,
                     "name" : "role",
                     "id" : "role",
-                    "ordinalPosition" : 2
+                    "ordinalPosition" : 2,
+                    "enabled" : true
                   }
                 ],
                 "name" : "roles",
-                "id" : "roles"
+                "id" : "roles",
+                "enabled" : true
+              },
+              {
+                "expanded" : true,
+                "primaryKeyColumns" : [
+                  {
+                    "expanded" : true,
+                    "name" : "id_u_asd",
+                    "id" : "id_u_asd",
+                    "ordinalPosition" : 1,
+                    "enabled" : true
+                  }
+                ],
+                "indexes" : [
+                  {
+                    "expanded" : false,
+                    "unique" : true,
+                    "name" : "PRIMARY",
+                    "indexColumns" : [
+                      {
+                        "orderType" : "ASC",
+                        "expanded" : true,
+                        "name" : "id_u_asd",
+                        "id" : "id_u_asd",
+                        "ordinalPosition" : 1
+                      }
+                    ],
+                    "id" : "PRIMARY",
+                    "enabled" : true
+                  }
+                ],
+                "isView" : false,
+                "columns" : [
+                  {
+                    "databaseType" : "java.lang.Integer",
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
+                    "expanded" : true,
+                    "nullable" : false,
+                    "name" : "id_u_asd",
+                    "id" : "id_u_asd",
+                    "ordinalPosition" : 1,
+                    "enabled" : true
+                  },
+                  {
+                    "databaseType" : "java.lang.Integer",
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
+                    "expanded" : true,
+                    "nullable" : false,
+                    "name" : "english_word_id",
+                    "id" : "english_word_id",
+                    "ordinalPosition" : 2,
+                    "enabled" : true
+                  },
+                  {
+                    "databaseType" : "java.lang.Short",
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
+                    "expanded" : true,
+                    "nullable" : false,
+                    "name" : "memo_percent",
+                    "id" : "memo_percent",
+                    "ordinalPosition" : 3,
+                    "enabled" : true
+                  }
+                ],
+                "name" : "u_asd",
+                "id" : "u_asd",
+                "enabled" : true
               },
               {
                 "expanded" : true,
@@ -351,7 +441,8 @@
                     "expanded" : true,
                     "name" : "id",
                     "id" : "id",
-                    "ordinalPosition" : 1
+                    "ordinalPosition" : 1,
+                    "enabled" : true
                   }
                 ],
                 "indexes" : [
@@ -368,7 +459,8 @@
                         "ordinalPosition" : 1
                       }
                     ],
-                    "id" : "PRIMARY"
+                    "id" : "PRIMARY",
+                    "enabled" : true
                   },
                   {
                     "expanded" : false,
@@ -383,19 +475,21 @@
                         "ordinalPosition" : 1
                       }
                     ],
-                    "id" : "UK_6dotkott2kjsp8vw4d0m25fb7"
+                    "id" : "UK_6dotkott2kjsp8vw4d0m25fb7",
+                    "enabled" : true
                   }
                 ],
                 "isView" : false,
                 "columns" : [
                   {
                     "databaseType" : "java.lang.Long",
-                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "expanded" : true,
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "nullable" : false,
                     "name" : "id",
                     "id" : "id",
-                    "ordinalPosition" : 1
+                    "ordinalPosition" : 1,
+                    "enabled" : true
                   },
                   {
                     "databaseType" : "java.lang.String",
@@ -403,7 +497,8 @@
                     "nullable" : true,
                     "name" : "activation",
                     "id" : "activation",
-                    "ordinalPosition" : 2
+                    "ordinalPosition" : 2,
+                    "enabled" : true
                   },
                   {
                     "databaseType" : "java.lang.String",
@@ -411,7 +506,8 @@
                     "nullable" : true,
                     "name" : "address",
                     "id" : "address",
-                    "ordinalPosition" : 3
+                    "ordinalPosition" : 3,
+                    "enabled" : true
                   },
                   {
                     "databaseType" : "java.lang.String",
@@ -419,7 +515,8 @@
                     "nullable" : true,
                     "name" : "birth_date",
                     "id" : "birth_date",
-                    "ordinalPosition" : 4
+                    "ordinalPosition" : 4,
+                    "enabled" : true
                   },
                   {
                     "databaseType" : "java.lang.String",
@@ -427,7 +524,8 @@
                     "nullable" : false,
                     "name" : "email",
                     "id" : "email",
-                    "ordinalPosition" : 5
+                    "ordinalPosition" : 5,
+                    "enabled" : true
                   },
                   {
                     "databaseType" : "java.lang.Boolean",
@@ -435,7 +533,8 @@
                     "nullable" : true,
                     "name" : "enabled",
                     "id" : "enabled",
-                    "ordinalPosition" : 6
+                    "ordinalPosition" : 6,
+                    "enabled" : true
                   },
                   {
                     "databaseType" : "java.lang.String",
@@ -443,7 +542,8 @@
                     "nullable" : true,
                     "name" : "fullname",
                     "id" : "fullname",
-                    "ordinalPosition" : 7
+                    "ordinalPosition" : 7,
+                    "enabled" : true
                   },
                   {
                     "databaseType" : "java.lang.String",
@@ -451,7 +551,8 @@
                     "nullable" : false,
                     "name" : "password",
                     "id" : "password",
-                    "ordinalPosition" : 8
+                    "ordinalPosition" : 8,
+                    "enabled" : true
                   },
                   {
                     "databaseType" : "java.lang.String",
@@ -459,7 +560,8 @@
                     "nullable" : true,
                     "name" : "phone_number",
                     "id" : "phone_number",
-                    "ordinalPosition" : 9
+                    "ordinalPosition" : 9,
+                    "enabled" : true
                   },
                   {
                     "databaseType" : "java.lang.String",
@@ -467,7 +569,8 @@
                     "nullable" : true,
                     "name" : "remark",
                     "id" : "remark",
-                    "ordinalPosition" : 10
+                    "ordinalPosition" : 10,
+                    "enabled" : true
                   },
                   {
                     "databaseType" : "java.lang.String",
@@ -475,13 +578,16 @@
                     "nullable" : true,
                     "name" : "username",
                     "id" : "username",
-                    "ordinalPosition" : 11
+                    "ordinalPosition" : 11,
+                    "enabled" : true
                   }
                 ],
                 "name" : "users",
-                "id" : "users"
+                "id" : "users",
+                "enabled" : true
               },
               {
+                "expanded" : true,
                 "foreignKeys" : [
                   {
                     "expanded" : false,
@@ -498,9 +604,11 @@
                       }
                     ],
                     "name" : "FK2o0jvgh89lemvvo17cbqvdxaa",
-                    "id" : "FK2o0jvgh89lemvvo17cbqvdxaa"
+                    "id" : "FK2o0jvgh89lemvvo17cbqvdxaa",
+                    "enabled" : true
                   },
                   {
+                    "nameProtected" : true,
                     "expanded" : false,
                     "foreignKeyColumns" : [
                       {
@@ -515,22 +623,24 @@
                       }
                     ],
                     "name" : "FKj6m8fwv7oqv74fcehir1a9ffy",
-                    "id" : "FKj6m8fwv7oqv74fcehir1a9ffy"
+                    "id" : "FKj6m8fwv7oqv74fcehir1a9ffy",
+                    "enabled" : true
                   }
                 ],
-                "expanded" : true,
                 "primaryKeyColumns" : [
                   {
                     "expanded" : true,
                     "name" : "role_id",
                     "id" : "role_id",
-                    "ordinalPosition" : 2
+                    "ordinalPosition" : 2,
+                    "enabled" : true
                   },
                   {
                     "expanded" : true,
                     "name" : "user_id",
                     "id" : "user_id",
-                    "ordinalPosition" : 1
+                    "ordinalPosition" : 1,
+                    "enabled" : true
                   }
                 ],
                 "indexes" : [
@@ -554,7 +664,8 @@
                         "ordinalPosition" : 2
                       }
                     ],
-                    "id" : "PRIMARY"
+                    "id" : "PRIMARY",
+                    "enabled" : true
                   },
                   {
                     "expanded" : false,
@@ -569,35 +680,38 @@
                         "ordinalPosition" : 1
                       }
                     ],
-                    "id" : "FKj6m8fwv7oqv74fcehir1a9ffy"
+                    "id" : "FKj6m8fwv7oqv74fcehir1a9ffy",
+                    "enabled" : true
                   }
                 ],
                 "isView" : false,
                 "columns" : [
                   {
                     "databaseType" : "java.lang.Long",
-                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "expanded" : true,
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "nullable" : false,
                     "name" : "user_id",
                     "id" : "user_id",
-                    "ordinalPosition" : 1
+                    "ordinalPosition" : 1,
+                    "enabled" : true
                   },
                   {
                     "databaseType" : "java.lang.Long",
-                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "expanded" : true,
+                    "typeMapper" : "com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper",
                     "nullable" : false,
                     "name" : "role_id",
                     "id" : "role_id",
-                    "ordinalPosition" : 2
+                    "ordinalPosition" : 2,
+                    "enabled" : true
                   }
                 ],
                 "name" : "users_roles",
-                "id" : "users_roles"
+                "id" : "users_roles",
+                "enabled" : true
               }
             ],
-            "expanded" : true,
             "name" : "szakdogadb",
             "id" : "szakdogadb",
             "enabled" : true

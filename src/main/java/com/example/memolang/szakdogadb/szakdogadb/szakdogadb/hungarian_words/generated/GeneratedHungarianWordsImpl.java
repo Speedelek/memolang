@@ -2,10 +2,8 @@ package com.example.memolang.szakdogadb.szakdogadb.szakdogadb.hungarian_words.ge
 
 import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.hungarian_words.HungarianWords;
 import com.speedment.common.annotation.GeneratedCode;
-import com.speedment.runtime.core.util.OptionalUtil;
 
 import java.util.Objects;
-import java.util.Optional;
 import java.util.StringJoiner;
 
 /**
@@ -22,6 +20,7 @@ public abstract class GeneratedHungarianWordsImpl implements HungarianWords {
     
     private int hungarianWordId;
     private String hungarianWord;
+    private String hungarianWordscol;
     
     protected GeneratedHungarianWordsImpl() {}
     
@@ -31,8 +30,13 @@ public abstract class GeneratedHungarianWordsImpl implements HungarianWords {
     }
     
     @Override
-    public Optional<String> getHungarianWord() {
-        return Optional.ofNullable(hungarianWord);
+    public String getHungarianWord() {
+        return hungarianWord;
+    }
+    
+    @Override
+    public String getHungarianWordscol() {
+        return hungarianWordscol;
     }
     
     @Override
@@ -48,10 +52,17 @@ public abstract class GeneratedHungarianWordsImpl implements HungarianWords {
     }
     
     @Override
+    public HungarianWords setHungarianWordscol(String hungarianWordscol) {
+        this.hungarianWordscol = hungarianWordscol;
+        return this;
+    }
+    
+    @Override
     public String toString() {
         final StringJoiner sj = new StringJoiner(", ", "{ ", " }");
-        sj.add("hungarianWordId = " + Objects.toString(getHungarianWordId()));
-        sj.add("hungarianWord = "   + Objects.toString(OptionalUtil.unwrap(getHungarianWord())));
+        sj.add("hungarianWordId = "   + Objects.toString(getHungarianWordId()));
+        sj.add("hungarianWord = "     + Objects.toString(getHungarianWord()));
+        sj.add("hungarianWordscol = " + Objects.toString(getHungarianWordscol()));
         return "HungarianWordsImpl " + sj.toString();
     }
     
@@ -62,6 +73,7 @@ public abstract class GeneratedHungarianWordsImpl implements HungarianWords {
         final HungarianWords thatHungarianWords = (HungarianWords)that;
         if (this.getHungarianWordId() != thatHungarianWords.getHungarianWordId()) { return false; }
         if (!Objects.equals(this.getHungarianWord(), thatHungarianWords.getHungarianWord())) { return false; }
+        if (!Objects.equals(this.getHungarianWordscol(), thatHungarianWords.getHungarianWordscol())) { return false; }
         return true;
     }
     
@@ -69,7 +81,8 @@ public abstract class GeneratedHungarianWordsImpl implements HungarianWords {
     public int hashCode() {
         int hash = 7;
         hash = 31 * hash + Integer.hashCode(getHungarianWordId());
-        hash = 31 * hash + Objects.hashCode(OptionalUtil.unwrap(getHungarianWord()));
+        hash = 31 * hash + Objects.hashCode(getHungarianWord());
+        hash = 31 * hash + Objects.hashCode(getHungarianWordscol());
         return hash;
     }
 }

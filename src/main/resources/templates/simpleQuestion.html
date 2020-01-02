@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymleaf.org">
+
+
+<head th:replace="layouts/header :: header"></head>
+<body>
+
+<div class="container">
+
+    <nav th:replace="layouts/navbar :: navbar-default"></nav>
+
+    <!--<article th:each="word : ${words}">
+        <header>
+            <h1 th:text="${word.englishWord}"></h1>
+
+        </header>
+
+        <section th:text="${word.partOfSpeech}">
+            <p>part of scpeech</p>
+        </section>
+
+        <hr/>
+    </article>-->
+
+    <form name="answer-one-question" th:action="@{/simpleQuestion}" th:object="${simpleAnswer}" method="post" class="form">
+        <p th:text="${word}">asd</p>
+
+        <input type="text" id="answer" name="answer" th:field="*{answer}"/>
+        <input type="submit" value="send"/>
+
+        <select th:field="*{counter}" hidden>
+            <option th:value="${questionCounter}">counter</option>
+        </select>
+
+        <select th:field="*{questionedWordId}" hidden>
+            <option th:value="${questionEnglishWordId}">englishWordId</option>
+        </select>
+
+        <select th:field="*{questionedWord}" hidden>
+            <option th:value="${questionEnglishWord}">englishWord</option>
+        </select>
+
+    </form>
+
+
+    <footer>
+        <p>Powered by Me</p>
+    </footer>
+
+</div>
+
+</body>
+</html>

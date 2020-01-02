@@ -33,8 +33,9 @@ public abstract class GeneratedHungarianWordsSqlAdapter implements SqlAdapter<Hu
     
     protected HungarianWords apply(ResultSet resultSet, int offset) throws SQLException {
         return createEntity()
-            .setHungarianWordId( resultSet.getInt(1 + offset))
-            .setHungarianWord(   resultSet.getString(2 + offset))
+            .setHungarianWordId(   resultSet.getInt(1 + offset))
+            .setHungarianWord(     resultSet.getString(2 + offset))
+            .setHungarianWordscol( resultSet.getString(3 + offset))
             ;
     }
     

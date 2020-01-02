@@ -1,11 +1,16 @@
 package com.example.memolang.controller;
 
 import com.example.memolang.entities.registration.User;
+import com.example.memolang.games.SimpleAnswer;
 import com.example.memolang.repository.UserRepository;
 import com.example.memolang.service.UserService;
 import com.example.memolang.service.WordEngService;
 import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.english_words.EnglishWords;
 import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.english_words.EnglishWordsManager;
+import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.hungarian_words.HungarianWords;
+import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.hungarian_words.HungarianWordsManager;
+import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.u_asd.UAsd;
+import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.u_asd.UAsdManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -25,6 +30,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Controller
@@ -50,8 +57,12 @@ public class HomeController {
 
     @Autowired
     EnglishWordsManager englishWords;
+    @Autowired
+    HungarianWordsManager hungarianWords;
+    @Autowired
+    UAsdManager uAsd;
 
-    @RequestMapping("/")
+    @RequestMapping("/")    //nah
     public String home(Model model) {
         model.addAttribute("words", wordEngService.getEnglishWords());
         return "home_v1";
@@ -59,18 +70,10 @@ public class HomeController {
 
     @RequestMapping("/allword")
     public String listAllWord(Model model){
-       // model.addAttribute("pageTitle", "Test title");
-       // model.addAttribute("footerText", "testFooter");
-        //model.addAttribute("buffets", buffetService.getBuffetEntities());
-        //model.addAttribute("words", wordEngService.getEnglishWords());
 
-       // List<EnglishWords> englishWordsList = englishWords.stream().collect(Collectors.toList());
-        //List<EnglishWords> englishWordsList = englishWords.stream().collect(Collectors.toList());
-        //model.addAttribute("words", englishWordsList);
-        EnglishWords englishWords1 = englishWords.stream().findFirst().get();
-        //System.out.println(englishWords1.getEnglishWordId() + " " + englishWords1.getEnglishWord() +
-        //        " " + englishWords1.getInSpeech() + " " + englishWords1.getInWriting() + " " + englishWords1.getPartOfSpeech());
-        model.addAttribute("words",englishWords1);
+        //EnglishWords englishWords1 = englishWords.stream().findFirst().filter(i -> i != null).get();
+        List<EnglishWords> englishWordsList2 = englishWords.stream().filter(s -> !"abandon".equals(s.getEnglishWord())).collect(Collectors.toList());
+        model.addAttribute("words",englishWordsList2);
         return "home_v2";
     }
 
@@ -160,9 +163,88 @@ public class HomeController {
         return "quickPlay";
     }
 
-    /*@RequestMapping(value = "/quickplay", method = RequestMethod.POST)
-    public String sendAnswers()*/
+    @RequestMapping(value = "/simplequestion", method = RequestMethod.GET)
+    public String askOneWord(Model model){
+        //List<EnglishWords> englishWordsList2 = englishWords.stream().filter(s -> !"abandon".equals(s.getEnglishWord())).collect(Collectors.toList());
+
+        Random rand = new Random();
+        int rand_id = rand.nextInt(50);
+
+        List<EnglishWords> oneWord = englishWords.stream().filter(s -> s.getEnglishWordId() == rand_id).collect(Collectors.toList());
+        model.addAttribute("word", oneWord.get(0).getEnglishWord());
+        System.out.println(oneWord.get(0).getEnglishWordId() + "     " + oneWord.get(0).getEnglishWord());
+        //SimpleAnswer simpleAnswer = new SimpleAnswer(oneWord.get(0).getEnglishWordId(), oneWord.get(0).getEnglishWord(),1);
+
+        model.addAttribute("questionCounter", 1);
+        model.addAttribute("questionEnglishWordId", oneWord.get(0).getEnglishWordId());
+        model.addAttribute("questionEnglishWord", oneWord.get(0).getEnglishWord());
+        model.addAttribute("simpleAnswer", new SimpleAnswer());
+        return "simpleQuestion";
+    }
 
 
+
+    @RequestMapping(value = "/simpleQuestion", method = RequestMethod.POST)
+    public String answerTenWord(Model model, @ModelAttribute SimpleAnswer simpleAnswer){
+        System.out.println(simpleAnswer.getQuestionedWordId() + "   " + simpleAnswer.getQuestionedWord() + "   " + simpleAnswer.getCounter() + "   " + simpleAnswer.getAnswer());
+
+        if(simpleAnswer.getCounter() < 11){
+
+            List<HungarianWords> correctAnswer = hungarianWords.stream().filter(s -> s.getHungarianWordId() == simpleAnswer.getQuestionedWordId()).collect(Collectors.toList());
+
+            Optional<UAsd> uAsdOptional = uAsd.stream().filter(UAsd.ENGLISH_WORD_ID.equal(simpleAnswer.getQuestionedWordId())).findFirst();
+            if(simpleAnswer.getAnswer().contentEquals(correctAnswer.get(0).getHungarianWord())){
+                System.out.println("correct");
+                //Optional<UAsd> uAsdOptional = uAsd.stream().filter(UAsd.ENGLISH_WORD_ID.equal(simpleAnswer.getQuestionedWordId())).findFirst();
+                uAsdOptional.ifPresent(s -> {
+                    if(s.getMemoPercent() < 100){
+                        s.setMemoPercent((short) (s.getMemoPercent()+20));
+                    }else{
+                        s.setMemoPercent((s.getMemoPercent()));
+                    }
+                    uAsd.update(s);
+                });
+            }else{
+                System.out.println("incorrect");
+                uAsdOptional.ifPresent(s -> {
+                    if(s.getMemoPercent() >= 20){
+                        s.setMemoPercent((short) (s.getMemoPercent()-20));
+                    }else{
+                        s.setMemoPercent((s.getMemoPercent()));
+                    }
+                    uAsd.update(s);
+                });
+            }
+
+            Random rand = new Random();
+            int rand_id = rand.nextInt(50);
+            List<EnglishWords> oneWord = englishWords.stream().filter(s -> s.getEnglishWordId() == rand_id).collect(Collectors.toList());
+            model.addAttribute("word", oneWord.get(0).getEnglishWord());
+            model.addAttribute("questionCounter", simpleAnswer.getCounter()+1);
+            model.addAttribute("questionEnglishWordId", oneWord.get(0).getEnglishWordId());
+            model.addAttribute("questionEnglishWord", oneWord.get(0).getEnglishWord());
+            model.addAttribute("simpleAnswer", new SimpleAnswer());
+            return "simpleQuestion";
+
+        }else{
+            System.out.println("END");
+            return "result";
+        }
+    }
+
+    @RequestMapping(value ="/result", method = RequestMethod.POST)
+    public String answerOneWord(Model model, @ModelAttribute SimpleAnswer simpleAnswer){
+        System.out.println(simpleAnswer.getQuestionedWordId() + "   " + simpleAnswer.getQuestionedWord() + "   " + simpleAnswer.getCounter() + "   " + simpleAnswer.getAnswer());
+
+        List<HungarianWords> correctAnswer2 = hungarianWords.stream().filter(s -> s.getHungarianWordId() == simpleAnswer.getQuestionedWordId()).collect(Collectors.toList());
+
+        if(simpleAnswer.getAnswer().contentEquals(correctAnswer2.get(0).getHungarianWord())){
+            //if(simpleAnswer.getAnswer().contentEquals("asd")){
+            model.addAttribute("res", "Correct");
+        }else{
+            model.addAttribute("res", "Incorrect");
+        }
+        return "result";
+    }
 
 }
