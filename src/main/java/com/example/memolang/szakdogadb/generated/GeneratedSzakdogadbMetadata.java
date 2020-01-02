@@ -500,12 +500,77 @@ public class GeneratedSzakdogadbMetadata extends AbstractApplicationMetadata {
             "              {",
             "                \"columns\" : [",
             "                  {",
+            "                    \"databaseType\" : \"java.lang.Integer\",",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"questioned_word_id\",",
+            "                    \"name\" : \"questioned_word_id\",",
+            "                    \"nullable\" : false,",
+            "                    \"ordinalPosition\" : 1,",
+            "                    \"typeMapper\" : \"com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper\"",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.Integer\",",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"questioned_word\",",
+            "                    \"name\" : \"questioned_word\",",
+            "                    \"nullable\" : false,",
+            "                    \"ordinalPosition\" : 2,",
+            "                    \"typeMapper\" : \"com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper\"",
+            "                  },",
+            "                  {",
+            "                    \"databaseType\" : \"java.lang.Integer\",",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"result\",",
+            "                    \"name\" : \"result\",",
+            "                    \"nullable\" : false,",
+            "                    \"ordinalPosition\" : 3,",
+            "                    \"typeMapper\" : \"com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper\"",
+            "                  }",
+            "                ],",
+            "                \"expanded\" : true,",
+            "                \"id\" : \"u_asd_play\",",
+            "                \"indexes\" : [",
+            "                  {",
+            "                    \"expanded\" : false,",
+            "                    \"id\" : \"PRIMARY\",",
+            "                    \"indexColumns\" : [",
+            "                      {",
+            "                        \"expanded\" : true,",
+            "                        \"id\" : \"questioned_word_id\",",
+            "                        \"name\" : \"questioned_word_id\",",
+            "                        \"orderType\" : \"ASC\",",
+            "                        \"ordinalPosition\" : 1",
+            "                      }",
+            "                    ],",
+            "                    \"name\" : \"PRIMARY\",",
+            "                    \"unique\" : true",
+            "                  }",
+            "                ],",
+            "                \"isView\" : false,",
+            "                \"name\" : \"u_asd_play\",",
+            "                \"primaryKeyColumns\" : [",
+            "                  {",
+            "                    \"expanded\" : true,",
+            "                    \"id\" : \"questioned_word_id\",",
+            "                    \"name\" : \"questioned_word_id\",",
+            "                    \"ordinalPosition\" : 1",
+            "                  }",
+            "                ]",
+            "              },",
+            "              {",
+            "                \"columns\" : [",
+            "                  {",
             "                    \"databaseType\" : \"java.lang.Long\",",
             "                    \"enabled\" : true,",
             "                    \"expanded\" : true,",
             "                    \"id\" : \"id\",",
             "                    \"name\" : \"id\",",
-            "                    \"nullable\" : false,",
+            "                    \"nullable\" : false,"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart5(StringBuilder sb) {
+        Stream.of(
             "                    \"ordinalPosition\" : 1,",
             "                    \"typeMapper\" : \"com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper\"",
             "                  },",
@@ -565,12 +630,7 @@ public class GeneratedSzakdogadbMetadata extends AbstractApplicationMetadata {
             "                  },",
             "                  {",
             "                    \"databaseType\" : \"java.lang.String\",",
-            "                    \"enabled\" : true,"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart5(StringBuilder sb) {
-        Stream.of(
+            "                    \"enabled\" : true,",
             "                    \"expanded\" : true,",
             "                    \"id\" : \"password\",",
             "                    \"name\" : \"password\",",
@@ -611,7 +671,12 @@ public class GeneratedSzakdogadbMetadata extends AbstractApplicationMetadata {
             "                \"indexes\" : [",
             "                  {",
             "                    \"enabled\" : true,",
-            "                    \"expanded\" : false,",
+            "                    \"expanded\" : false,"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart6(StringBuilder sb) {
+        Stream.of(
             "                    \"id\" : \"PRIMARY\",",
             "                    \"indexColumns\" : [",
             "                      {",
@@ -671,12 +736,7 @@ public class GeneratedSzakdogadbMetadata extends AbstractApplicationMetadata {
             "                    \"enabled\" : true,",
             "                    \"expanded\" : true,",
             "                    \"id\" : \"role_id\",",
-            "                    \"name\" : \"role_id\","
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart6(StringBuilder sb) {
-        Stream.of(
+            "                    \"name\" : \"role_id\",",
             "                    \"nullable\" : false,",
             "                    \"ordinalPosition\" : 2,",
             "                    \"typeMapper\" : \"com.speedment.runtime.typemapper.primitive.PrimitiveTypeMapper\"",
@@ -717,7 +777,12 @@ public class GeneratedSzakdogadbMetadata extends AbstractApplicationMetadata {
             "                        \"name\" : \"role_id\",",
             "                        \"ordinalPosition\" : 1",
             "                      }",
-            "                    ],",
+            "                    ],"
+        ).forEachOrdered(sb::append);
+    }
+    
+    private static void initPart7(StringBuilder sb) {
+        Stream.of(
             "                    \"id\" : \"FKj6m8fwv7oqv74fcehir1a9ffy\",",
             "                    \"name\" : \"FKj6m8fwv7oqv74fcehir1a9ffy\",",
             "                    \"nameProtected\" : true",
@@ -777,12 +842,7 @@ public class GeneratedSzakdogadbMetadata extends AbstractApplicationMetadata {
             "                  },",
             "                  {",
             "                    \"enabled\" : true,",
-            "                    \"expanded\" : true,"
-        ).forEachOrdered(sb::append);
-    }
-    
-    private static void initPart7(StringBuilder sb) {
-        Stream.of(
+            "                    \"expanded\" : true,",
             "                    \"id\" : \"user_id\",",
             "                    \"name\" : \"user_id\",",
             "                    \"ordinalPosition\" : 1",

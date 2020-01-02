@@ -18,6 +18,8 @@ import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.roles.RolesManagerI
 import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.roles.RolesSqlAdapter;
 import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.u_asd.UAsdManagerImpl;
 import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.u_asd.UAsdSqlAdapter;
+import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.u_asd_play.UAsdPlayManagerImpl;
+import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.u_asd_play.UAsdPlaySqlAdapter;
 import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.users.UsersManagerImpl;
 import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.users.UsersSqlAdapter;
 import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.users_roles.UsersRolesManagerImpl;
@@ -49,6 +51,7 @@ public abstract class GeneratedSzakdogadbApplicationBuilder extends AbstractAppl
         withManager(HungarianWordsManagerImpl.class);
         withManager(RolesManagerImpl.class);
         withManager(UAsdManagerImpl.class);
+        withManager(UAsdPlayManagerImpl.class);
         withManager(UsersManagerImpl.class);
         withManager(UsersRolesManagerImpl.class);
         withComponent(EnglishHungarianSqlAdapter.class);
@@ -58,6 +61,7 @@ public abstract class GeneratedSzakdogadbApplicationBuilder extends AbstractAppl
         withComponent(HungarianWordsSqlAdapter.class);
         withComponent(RolesSqlAdapter.class);
         withComponent(UAsdSqlAdapter.class);
+        withComponent(UAsdPlaySqlAdapter.class);
         withComponent(UsersSqlAdapter.class);
         withComponent(UsersRolesSqlAdapter.class);
         withBundle(MySqlBundle.class);

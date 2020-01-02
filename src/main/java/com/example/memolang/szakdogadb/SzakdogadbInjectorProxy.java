@@ -35,7 +35,7 @@ public final class SzakdogadbInjectorProxy implements InjectorProxy {
     }
     
     @Override
-    public <T> T newInstance(Constructor<T> constructor, Object... args) throws InstantiationException, IllegalAccessException, InvocationTargetException {
+    public <T> T newInstance(Constructor<T> constructor, Object... args) throws IllegalAccessException, InvocationTargetException, InstantiationException {
         return constructor.newInstance(args);
     }
     
@@ -43,7 +43,7 @@ public final class SzakdogadbInjectorProxy implements InjectorProxy {
     public Object invoke(
             Method method,
             Object obj,
-            Object... args) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+            Object... args) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
         return method.invoke(obj, args);
     }
 }

@@ -11,11 +11,22 @@
 
     <nav th:replace="layouts/navbar :: navbar-default"></nav>
 
-    <p th:text="${res}">asd</p>
+    <article th:each="word : ${questionedWords}">
+        <header>
+            <h2 th:text="${word.questionedWord}"></h2>
+        </header>
 
-    <footer>
+        <section th:text="${word.result}">
+            <p>this question's result</p>
+        </section>
+    </article>
+
+    <H3>Correctly answered questions: </H3>
+    <h1 th:text="${finalResult}"></h1>
+
+    <!--<footer>
         <p>Powered by Me</p>
-    </footer>
+    </footer>-->
 
 </div>
 

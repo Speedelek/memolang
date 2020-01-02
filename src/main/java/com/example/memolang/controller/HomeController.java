@@ -11,6 +11,9 @@ import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.hungarian_words.Hun
 import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.hungarian_words.HungarianWordsManager;
 import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.u_asd.UAsd;
 import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.u_asd.UAsdManager;
+import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.u_asd_play.UAsdPlay;
+import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.u_asd_play.UAsdPlayManager;
+import com.speedment.runtime.core.exception.SpeedmentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -29,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -61,6 +65,8 @@ public class HomeController {
     HungarianWordsManager hungarianWords;
     @Autowired
     UAsdManager uAsd;
+    @Autowired
+    UAsdPlayManager uAsdPlay;
 
     @RequestMapping("/")    //nah
     public String home(Model model) {
@@ -204,6 +210,14 @@ public class HomeController {
                     }
                     uAsd.update(s);
                 });
+
+                UAsdPlay uAsdPlay1 = uAsdPlay.create().setQuestionedWordId(simpleAnswer.getCounter()).setQuestionedWord(simpleAnswer.getQuestionedWordId()).setResult(1);
+                try {
+                    uAsdPlay.persist(uAsdPlay1);
+                }catch (SpeedmentException se){
+                    System.out.println("Failed to persist " + uAsdPlay1 + ". " + se.getMessage());
+                }
+
             }else{
                 System.out.println("incorrect");
                 uAsdOptional.ifPresent(s -> {
@@ -214,6 +228,13 @@ public class HomeController {
                     }
                     uAsd.update(s);
                 });
+
+                UAsdPlay uAsdPlay1 = uAsdPlay.create().setQuestionedWordId(simpleAnswer.getCounter()).setQuestionedWord(simpleAnswer.getQuestionedWordId()).setResult(0);
+                try {
+                    uAsdPlay.persist(uAsdPlay1);
+                }catch (SpeedmentException se){
+                    System.out.println("Failed to persist " + uAsdPlay1 + ". " + se.getMessage());
+                }
             }
 
             Random rand = new Random();
@@ -227,6 +248,24 @@ public class HomeController {
             return "simpleQuestion";
 
         }else{
+            List<UAsdPlay> allQuestionedWord = uAsdPlay.stream().filter(s -> s.getQuestionedWordId() != 1000 ).collect(Collectors.toList());
+            /*List<EnglishWords> questionedWordList = new ArrayList<>();
+            for(int i = 0 ; i < 11; i++){
+                List<EnglishWords> oneWord = englishWords.stream().filter(s -> s.getEnglishWordId() == i).collect(Collectors.toList());
+                questionedWordList.add(oneWord.get(0));
+            }*/
+
+            /*List<EnglishWords> allQuestionedWord1 =
+                    englishWords.stream()
+                            .filter(eng -> uAsdPlay.stream()
+                                    .anyMatch(asd -> asd.getResult() != 3)).collect(Collectors.toList());
+            */
+
+            model.addAttribute("questionedWords", allQuestionedWord);
+            model.addAttribute("finalResult", uAsdPlay.stream().filter(s -> s.getResult() == 1).count());
+
+            uAsdPlay.stream().filter(UAsdPlay.QUESTIONED_WORD_ID.notEqual(1000))
+                    .forEach(uAsdPlay.remover());
             System.out.println("END");
             return "result";
         }

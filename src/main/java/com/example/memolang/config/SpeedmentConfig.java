@@ -6,6 +6,7 @@ import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.english_words.Engli
 import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.hungarian_words.HungarianWordsManager;
 import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.u_asd.UAsd;
 import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.u_asd.UAsdManager;
+import com.example.memolang.szakdogadb.szakdogadb.szakdogadb.u_asd_play.UAsdPlayManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -30,5 +31,8 @@ public class SpeedmentConfig {
 
     @Bean
     UAsdManager getUAsdManager(SzakdogadbApplication app){return app.getOrThrow(UAsdManager.class);}
+
+    @Bean
+    UAsdPlayManager getUAsdPlayManager(SzakdogadbApplication app){return app.getOrThrow(UAsdPlayManager.class);}
 
 }
