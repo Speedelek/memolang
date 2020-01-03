@@ -25,7 +25,7 @@
     </article>-->
 
     <form name="answer-one-question" th:action="@{/simpleQuestion}" th:object="${simpleAnswer}" method="post" class="form">
-        <p th:text="${word}">asd</p>
+        <h1 th:text="${word}">asd</h1>
 
         <input type="text" id="answer" name="answer" th:field="*{answer}"/>
         <input type="submit" value="send"/>

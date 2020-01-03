@@ -1,6 +1,7 @@
 package com.example.memolang.controller;
 
 import com.example.memolang.entities.registration.User;
+import com.example.memolang.games.AllQuestionResult;
 import com.example.memolang.games.SimpleAnswer;
 import com.example.memolang.repository.UserRepository;
 import com.example.memolang.service.UserService;
@@ -78,9 +79,16 @@ public class HomeController {
     public String listAllWord(Model model){
 
         //EnglishWords englishWords1 = englishWords.stream().findFirst().filter(i -> i != null).get();
-        List<EnglishWords> englishWordsList2 = englishWords.stream().filter(s -> !"abandon".equals(s.getEnglishWord())).collect(Collectors.toList());
+        List<EnglishWords> englishWordsList2 = englishWords.stream().filter(s -> !"doesnotexist".equals(s.getEnglishWord())).collect(Collectors.toList());
         model.addAttribute("words",englishWordsList2);
         return "home_v2";
+    }
+
+    @RequestMapping("/allhword")
+    public String listAllHWord(Model model){
+        List<HungarianWords> hungarianWordsList = hungarianWords.stream().filter(s -> !"doesnotexist".equals(s.getHungarianWord())).collect(Collectors.toList());
+        model.addAttribute("words",hungarianWordsList);
+        return "hungarian_list";
     }
 
     @RequestMapping("/profile")

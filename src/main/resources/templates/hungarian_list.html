@@ -13,21 +13,14 @@
 
     <article th:each="word : ${words}">
         <header>
-            <p th:text="${word.englishWordId}">id</p>
-            <h1 th:text="${word.englishWord}">word</h1>
-            <!--<h2 th:text="${word.englishWordId}"></h2>-->
+            <p th:text="${word.hungarianWordId}">id</p>
+            <h1 th:text="${word.hungarianWord}">word</h1>
         </header>
 
-        <section th:text="${word.partOfSpeech}">
-            <p>part of scpeech</p>
-        </section>
-
-
-        <hr/>
     </article>
 
     <ul></ul>
-    
+
 
     <footer>
         <p>Powered by Me</p>
