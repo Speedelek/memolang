@@ -77,8 +77,6 @@ public class HomeController {
 
     @RequestMapping("/allword")
     public String listAllWord(Model model){
-
-        //EnglishWords englishWords1 = englishWords.stream().findFirst().filter(i -> i != null).get();
         List<EnglishWords> englishWordsList2 = englishWords.stream().filter(s -> !"doesnotexist".equals(s.getEnglishWord())).collect(Collectors.toList());
         model.addAttribute("words",englishWordsList2);
         return "home_v2";
@@ -93,7 +91,6 @@ public class HomeController {
 
     @RequestMapping("/profile")
     public String profile(Model model, @AuthenticationPrincipal UserDetails currentUser) {
-        // model.addAttribute("user", userService.findByUsername(username));
         User user = (User) userService.findByUsername(currentUser.getUsername());
         model.addAttribute("user", user);
         return "profile";
@@ -103,7 +100,6 @@ public class HomeController {
     @PostMapping("/delete")
     public String delete(@AuthenticationPrincipal UserDetails currentUser, HttpServletRequest request, HttpServletResponse response) {
         User user = (User) userService.findByUsername(currentUser.getUsername());
-        // usersRoleSercive.deleteUsersRole(user);
         Long id = user.getId();
         userService.deleteById(Long.valueOf(id));
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -153,18 +149,15 @@ public class HomeController {
             System.out.println("hiba email");
             model.addAttribute("errorMessage", "Már létezik ilyen email cím");
             bindingResult.reject("email");
-            //return "registration";
         }
         if (userCheck2 != null) {
             System.out.println("hiba username");
             model.addAttribute("errorMessage", "Már létezik ilyen felhasználó");
             bindingResult.reject("username");
-            //return "registration";
         }
         if (bindingResult.hasErrors()) {
             return "registration";
         } else {
-            //log.info("Uj user!");
             userService.registerUser(user);
             return "auth/login";
         }
@@ -173,14 +166,11 @@ public class HomeController {
     @RequestMapping(value = "/quickplay", method = RequestMethod.GET)
     public String getTenRandomEnglishWord(Model model){
         model.addAttribute("words", wordEngService.getTenRandomWord());
-        //System.out.println(englishWords.stream().collect(Collectors.toList()));
         return "quickPlay";
     }
 
     @RequestMapping(value = "/simplequestion", method = RequestMethod.GET)
     public String askOneWord(Model model){
-        //List<EnglishWords> englishWordsList2 = englishWords.stream().filter(s -> !"abandon".equals(s.getEnglishWord())).collect(Collectors.toList());
-
         Random rand = new Random();
         int rand_id = rand.nextInt(50);
 
@@ -196,8 +186,7 @@ public class HomeController {
         return "simpleQuestion";
     }
 
-
-
+    
     @RequestMapping(value = "/simpleQuestion", method = RequestMethod.POST)
     public String answerTenWord(Model model, @ModelAttribute SimpleAnswer simpleAnswer){
         System.out.println(simpleAnswer.getQuestionedWordId() + "   " + simpleAnswer.getQuestionedWord() + "   " + simpleAnswer.getCounter() + "   " + simpleAnswer.getAnswer());
@@ -286,7 +275,6 @@ public class HomeController {
         List<HungarianWords> correctAnswer2 = hungarianWords.stream().filter(s -> s.getHungarianWordId() == simpleAnswer.getQuestionedWordId()).collect(Collectors.toList());
 
         if(simpleAnswer.getAnswer().contentEquals(correctAnswer2.get(0).getHungarianWord())){
-            //if(simpleAnswer.getAnswer().contentEquals("asd")){
             model.addAttribute("res", "Correct");
         }else{
             model.addAttribute("res", "Incorrect");
