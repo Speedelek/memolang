@@ -2,6 +2,7 @@ package com.example.memolang.controller;
 
 import com.example.memolang.entities.registration.User;
 import com.example.memolang.games.AllQuestionResult;
+import com.example.memolang.games.GallowsAnswer;
 import com.example.memolang.games.SimpleAnswer;
 import com.example.memolang.repository.UserRepository;
 import com.example.memolang.service.UserService;
@@ -33,10 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -77,8 +75,13 @@ public class HomeController {
 
     @RequestMapping("/allword")
     public String listAllWord(Model model){
+
+
+
         List<EnglishWords> englishWordsList2 = englishWords.stream().filter(s -> !"doesnotexist".equals(s.getEnglishWord())).collect(Collectors.toList());
+        //List<HungarianWords> hungarianWords2 = hungarianWords.stream().filter(s -> !"doesnotexist".equals(s.getHungarianWord())).collect(Collectors.toList());
         model.addAttribute("words",englishWordsList2);
+        //model.addAttribute("wordsH",hungarianWords2);
         return "home_v2";
     }
 
@@ -186,7 +189,126 @@ public class HomeController {
         return "simpleQuestion";
     }
 
-    
+    @RequestMapping(value = "/gallowsgame", method = RequestMethod.GET)
+    public String gallowsGame(Model model){
+        Random rand = new Random();
+        int rand_id = rand.nextInt(100);
+
+        List<EnglishWords> oneWord = englishWords.stream().filter(s -> s.getEnglishWordId() == rand_id).collect(Collectors.toList());
+        model.addAttribute("word", oneWord.get(0).getEnglishWord());
+
+        int wordLength = oneWord.get(0).getEnglishWord().length();
+        int guessedLettersCounter = 0;
+        int rounds = 12;
+        int misses = 1;
+
+        model.addAttribute("misses", misses);
+        model.addAttribute("imageNumber", misses);
+        model.addAttribute("roundsLeft", rounds);
+        model.addAttribute("guessedLetters", guessedLettersCounter);
+        model.addAttribute("questionEnglishWordId", oneWord.get(0).getEnglishWordId());
+        model.addAttribute("questionEnglishWord", oneWord.get(0).getEnglishWord());
+        model.addAttribute("questionEnglishWordLength", wordLength);
+        System.out.println(wordLength);
+        model.addAttribute("roundCounter",1);
+        model.addAttribute("lengthText", "A választott szó " + wordLength + " betű hosszú.");
+        model.addAttribute("gallowsAnswer", new GallowsAnswer());
+
+        String tmpText = "_ ";
+        for(int i=0; i<wordLength-1; i++){
+            tmpText = tmpText + "_ ";
+        }
+        model.addAttribute("lines",tmpText);
+
+        List<String> alphabetArray = Arrays.asList("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z");
+        model.addAttribute("alphabet", alphabetArray);
+
+        return "gallowsGame";
+    }
+
+    @RequestMapping(value = "/gallowsGame", method = RequestMethod.POST)
+    public String actualGame(Model model, @ModelAttribute GallowsAnswer gallowsAnswer){
+
+        if(gallowsAnswer.getCounter() < 12-gallowsAnswer.getMisses()){
+
+            String strokes = gallowsAnswer.getStrokes();
+
+           // List<String> alphabetArray = new ArrayList<>(Arrays.asList("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"));//alphabet
+            List<String> alphabetArray = gallowsAnswer.getAlphabetA();
+            alphabetArray.removeIf(s -> s.contentEquals(gallowsAnswer.getAnswer()));
+
+            //int hitIndex = gallowsAnswer.getQuestionedWord().indexOf(gallowsAnswer.getAnswer());
+
+            char answerChar = gallowsAnswer.getAnswer().charAt(0);
+
+            StringBuilder replacedStrokes = new StringBuilder(strokes);
+            //replacedStrokes.setCharAt(hitIndex*2, answerChar);
+
+
+            int misses = gallowsAnswer.getMisses();
+            int guessedLettersCounter = gallowsAnswer.getGuessedLetters();
+            int index = gallowsAnswer.getQuestionedWord().indexOf(answerChar);
+            System.out.println("index: " + index);
+            if(index == -1){
+                misses++;
+            }
+            System.out.println(misses);
+            if(index != -1){
+                replacedStrokes.setCharAt(index*2, answerChar);
+                while (index >= 0) {
+                    guessedLettersCounter++;
+                    //System.out.println("kitalalt betuk szama= " + guessedLettersCounter);
+                    replacedStrokes.setCharAt(index*2, answerChar);
+                    index = gallowsAnswer.getQuestionedWord().indexOf(answerChar, index + 1);
+                }
+            }
+            System.out.println(alphabetArray);
+
+
+            if(guessedLettersCounter == gallowsAnswer.getQuestionedWordLength()){
+                model.addAttribute("finalResult", "Gratulálok sikerült kitalálnod a szót!");
+                model.addAttribute("questionEnglishWord", gallowsAnswer.getQuestionedWord());
+                return "gallowsGameResult";
+            }
+
+            String alphabetLeft = "";
+            for(String s:alphabetArray){
+                alphabetLeft = alphabetLeft + ", " + s.toString();
+            }
+            //System.out.println(misses);
+
+            int rounds = 11 - gallowsAnswer.getMisses();
+
+            model.addAttribute("misses", misses);
+            model.addAttribute("imageNumber", misses);
+            model.addAttribute("roundsLeft", "Hibalehetőségek száma: " + rounds);
+            model.addAttribute("lines",replacedStrokes);
+            model.addAttribute("alphabetLeft", alphabetLeft);
+            model.addAttribute("alphabet", alphabetArray);
+            model.addAttribute("guessedLetters", guessedLettersCounter);
+
+            model.addAttribute("questionEnglishWordId", gallowsAnswer.getQuestionedWordId());
+            model.addAttribute("questionEnglishWord", gallowsAnswer.getQuestionedWord());
+            model.addAttribute("questionEnglishWordLength", gallowsAnswer.getQuestionedWordLength());
+            model.addAttribute("roundCounter",gallowsAnswer.getCounter()+1);
+            model.addAttribute("lengthText", "A választott szó " + gallowsAnswer.getQuestionedWordLength() + " betű hosszú.");
+            model.addAttribute("gallowsAnswer", new GallowsAnswer());
+
+        }
+        else if(gallowsAnswer.getGuessedLetters() == gallowsAnswer.getQuestionedWordLength())
+        {
+            model.addAttribute("finalResult", "Gratulálok sikerült kitalálnod a szót!");
+            model.addAttribute("questionEnglishWord", gallowsAnswer.getQuestionedWord());
+            return "gallowsGameResult";
+        }else if(gallowsAnswer.getMisses() > 11){
+            model.addAttribute("finalResult", "Sajnos nem sikerült kitalálnod a szót!");
+            model.addAttribute("questionEnglishWord", gallowsAnswer.getQuestionedWord());
+            return "gallowsGameResult";
+        }
+
+        return "gallowsGame";
+    }
+
     @RequestMapping(value = "/simpleQuestion", method = RequestMethod.POST)
     public String answerTenWord(Model model, @ModelAttribute SimpleAnswer simpleAnswer){
         System.out.println(simpleAnswer.getQuestionedWordId() + "   " + simpleAnswer.getQuestionedWord() + "   " + simpleAnswer.getCounter() + "   " + simpleAnswer.getAnswer());

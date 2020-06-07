@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymleaf.org">
+
+
+<head th:replace="layouts/header :: header"></head>
+<body>
+
+<div class="container">
+
+    <nav th:replace="layouts/navbar :: navbar-default"></nav>
+
+
+    <form name="gallows-game" th:action="@{/gallowsGame}" th:object="${gallowsAnswer}" method="post" class="form">
+        <h1 th:text="${word}">asd</h1>
+        <h1 th:text="${roundsLeft} + ' hibalehetőség'">maradékkörök</h1>
+        <h2 th:text="${lengthText}">szóhossz</h2>
+        <h1 th:text="${lines}">vonal</h1>
+        <h1 th:text="${congratulation}">gratuláció</h1>
+        <!--<h2>Adjon meg egy betűt az alábbiak közül:</h2>-->
+
+        <tr th:each="alph : ${alphabet}">
+            <td th:text="${alph}">Onions</td>
+        </tr>
+
+        <br>
+        <br>
+
+        <!--<img src="static/gallowsGame/1.png" width="1000" th:src="@{gallowsGame/1.png}"/>-->
+
+
+        <input type="text" id="answer" name="answer" pattern="[a-z]{1,1}" th:field="*{answer}"/>
+        <input type="submit" value="send"/>
+        <img th:src="@{'/static/images/' + ${imageNumber} +'.png'}"/>
+        <br>
+
+        <select th:field="*{alphabetA}" hidden>
+            <option th:value="${alphabet}">counter</option>
+        </select>
+
+        <select th:field="*{counter}" hidden>
+            <option th:value="${roundCounter}">counter</option>
+        </select>
+
+        <select th:field="*{misses}" hidden>
+            <option th:value="${misses}">strokes</option>
+        </select>
+
+        <select th:field="*{questionedWordId}" hidden>
+            <option th:value="${questionEnglishWordId}">englishWordId</option>
+        </select>
+
+        <select th:field="*{questionedWord}" hidden>
+            <option th:value="${questionEnglishWord}">englishWord</option>
+        </select>
+
+        <select th:field="*{questionedWordLength}" hidden>
+            <option th:value="${questionEnglishWordLength}">englishWordId</option>
+        </select>
+
+        <select th:field="*{strokes}" hidden>
+            <option th:value="${lines}">strokes</option>
+        </select>
+
+        <select th:field="*{guessedLetters}" hidden>
+            <option th:value="${guessedLetters}">strokes</option>
+        </select>
+
+    </form>
+
+    <!--<form name="answer-one-question" th:action="@{/simpleQuestion}" th:object="${simpleAnswer}" method="post" class="form">
+        <h1 th:text="${word}">asd</h1>
+
+        <input type="text" id="answer" name="answer" th:field="*{answer}"/>
+        <input type="submit" value="send"/>
+
+        <select th:field="*{counter}" hidden>
+            <option th:value="${questionCounter}">counter</option>
+        </select>
+
+        <select th:field="*{questionedWordId}" hidden>
+            <option th:value="${questionEnglishWordId}">englishWordId</option>
+        </select>
+
+        <select th:field="*{questionedWord}" hidden>
+            <option th:value="${questionEnglishWord}">englishWord</option>
+        </select>
+
+    </form>-->
+
+
+    <footer>
+        <p>Powered by Me</p>
+    </footer>
+
+</div>
+
+</body>
+</html>

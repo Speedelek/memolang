@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymleaf.org">
+
+
+<head th:replace="layouts/header :: header"></head>
+<body>
+
+<div class="container">
+
+    <nav th:replace="layouts/navbar :: navbar-default"></nav>
+
+    <h1 th:text="${finalResult}">eredmény</h1>
+
+
+    <footer>
+        <p>Powered by Me</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
